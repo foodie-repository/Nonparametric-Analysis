@@ -47,6 +47,7 @@ uv.lock
 *.tmp
 *.temp
 .cache/
+image/
 
 # macOS
 .DS_Store
