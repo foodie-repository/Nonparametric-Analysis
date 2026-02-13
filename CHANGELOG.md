@@ -12,17 +12,20 @@
 ## [0.3.1] - 2026-02-14
 
 ### Added
+
 - 📋 **데이터 복사/붙여넣기 지원** (DRM 문서용)
   - `PASTE_DATA` 변수에 데이터를 직접 붙여넣기하여 분석 가능
   - 쉼표, 탭, 세미콜론 구분자 자동 인식
   - Excel에서 복사한 탭 구분 데이터도 처리 가능
 
 ### Fixed
+
 - 🐛 템플릿 노트북 셀 구조 정리
   - 이전 업데이트에서 남아있던 16개 중복 셀 제거
   - 마크다운 섹션 헤더가 코드 셀 앞에 오도록 순서 정렬
 
 ### Changed
+
 - 🎨 **템플릿 노트북 헤딩/구조를 final 노트북과 통일**
   - 타이틀: `#`(h1) → `##`(h2)
   - 분석 항목: `###`(h3) → `####`(h4)
@@ -40,9 +43,11 @@
 ## [0.3.0] - 2026-02-14
 
 ### Added
+
 - 📋 `02_Data/데이터_준비_가이드.md` - 비개발자용 데이터 입력 안내 문서 신규 작성
 
 ### Changed
+
 - 🎯 **템플릿 노트북 사용성 대폭 개선**
   - "설정 셀 하나만 수정"하면 본인 데이터로 전체 분석 가능
   - 데이터 검증 + 한국어 오류 안내 내장 (컬럼 누락, 그룹값 오류 등)
@@ -57,24 +62,28 @@
 ## [0.2.1] - 2026-02-14
 
 ### Fixed
+
 - 🐛 노트북 차트/결과 미출력 문제 수정
   - `matplotlib.use('Agg')` 제거 → `%matplotlib inline`으로 차트 정상 표시
   - 모든 분석 셀에 `show_result()` 헬퍼 추가 → 결과 요약 + 차트 자동 출력
   - `nonparametric_analysis_final.ipynb`, `nonparametric_analysis_template.ipynb` 모두 수정
 
 ### Changed
+
 - 📝 README.md 최근 업데이트 섹션 갱신
 - 📝 01_Specs/04_패키지_가이드.md 현재 패키지 구조 반영
 - 📝 AGENTS.md 디렉터리 기준 현행화
 
 ### Removed
+
 - 🗑️ 중복 `notebooks/` 폴더 삭제
 
 ---
 
-## [0.2.0] - 2024-02-14
+## [0.2.0] - 2026-02-14
 
 ### Added
+
 - 📚 `01_Specs/README.md` - Specs 문서 가이드 추가
 - 📋 `CHANGELOG.md` - 변경사항 추적 문서 추가
 - 📖 `05_비모수_통계분석_결과_해석_가이드.md` - 일반인용 결과 해석 가이드
@@ -82,6 +91,7 @@
 - 🗂️ `.gitignore` - Python, Jupyter, uv 관련 파일 제외
 
 ### Changed
+
 - 🏗️ **Phase 3: 패키지 구조 리팩토링 완료**
   - `nonparametric_methods.py` 단일 파일 → 카테고리별 4개 모듈로 분리
     - `core/single_variable.py` - 정규성, 런, 추세, 변곡점, PELT
@@ -102,12 +112,14 @@
   - 패키지 Import 방법 가이드 추가
 
 ### Removed
+
 - 🗑️ 불필요한 파일 제거
   - `README_OLD.md` (구버전 README)
   - `PHASE3_PLAN.md`, `프로젝트_구조_개선_제안.md` (완료된 계획 문서)
   - `__pycache__/`, `test_before_refactor.log` (임시 파일)
 
 ### Fixed
+
 - 🐛 모든 분석 함수 파라미터 오류 수정 (7개 함수)
   - Mann-Whitney: `name_a/name_b` → `name1/name2`
   - K-S Test: `name_a/name_b` → `name1/name2`
@@ -122,9 +134,10 @@
 
 ---
 
-## [0.1.0] - 2024-02-13
+## [0.1.0] - 2026-02-13
 
 ### Added
+
 - 🎉 초기 프로젝트 구조 생성
 - 📊 17종 비모수 분석 함수 구현
   - 단일 변수 분석 (5종)
@@ -149,6 +162,7 @@
 - 📦 uv 패키지 매니저 채택
 
 ### Technical
+
 - Python 3.11+ 지원
 - 의존성: scipy, numpy, pandas, matplotlib, seaborn
 - 특수 라이브러리: pymannkendall, ruptures, dcor
@@ -169,6 +183,7 @@
 ## 다음 계획 (Future)
 
 ### v0.4.0 (예정)
+
 - [ ] React 프론트엔드 통합
 - [ ] API 엔드포인트 확장
 - [ ] 추가 비모수 검정 방법
@@ -176,6 +191,7 @@
   - Jonckheere-Terpstra Test
 
 ### v0.5.0 (예정)
+
 - [ ] 사용자 인터페이스 개선
 - [ ] 보고서 자동 생성 기능
 - [ ] 다국어 지원 (영어)
