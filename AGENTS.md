@@ -34,11 +34,17 @@ uv run pytest
 ## 4) 디렉터리 기준
 
 - `main.py`: FastAPI 앱 엔트리포인트
-- `src/nonparametric_analysis/`: 핵심 패키지 코드
+- `03_Code/src/nonparametric_analysis/`: 핵심 분석 패키지
+  - `core/`: 분석 함수 (single_variable, group_comparison, correlation, resampling)
+  - `utils/`: 통계 헬퍼, 정합성 검사, 샘플 데이터 생성
+  - `visualization/`: 시각화 설정 (한글 폰트)
+  - `analysis/`: 기존 import 호환용 래퍼
+- `03_Code/scripts/`: 실행 스크립트 (분석 파이프라인, 데이터 생성)
+- `04_Notebooks/`: Jupyter 노트북 (분석 + 해석 가이드)
 - `tests/`: 테스트 코드
 - `pyproject.toml`: 의존성/빌드/pytest 설정
 
-새 기능은 가능하면 `main.py`에 직접 누적하지 말고 `src/nonparametric_analysis/` 내부 모듈로 분리한 뒤 라우터에서 연결합니다.
+새 기능은 가능하면 `main.py`에 직접 누적하지 말고 `03_Code/src/nonparametric_analysis/` 내부 모듈로 분리한 뒤 라우터에서 연결합니다.
 
 ## 5) 코드 작성 규칙
 

@@ -119,9 +119,11 @@ uv run python 03_Code/scripts/run_nonparametric_analysis.py \
   - 17종 비모수 분석 전체 포함
   - 각 분석마다 **통계 비전문가를 위한 상세한 해석 가이드** 포함
   - 실무 활용 예시 및 차트 읽는 법 설명
+  - `show_result(res)` 헬퍼로 결과 요약 + 차트 자동 출력
 
 - `04_Notebooks/nonparametric_analysis_template.ipynb`
   - 새로운 데이터로 분석 시작 시 복사해서 사용
+  - final과 동일한 `show_result()` 헬퍼 내장
 
 ## 테스트
 
@@ -203,15 +205,16 @@ from nonparametric_analysis.utils import generate_sample_dataset, adjust_pvalue_
 - 개발 규칙 및 체크리스트는 `AGENTS.md`를 참조하세요.
 - 변경 이력은 `CHANGELOG.md`를 참조하세요.
 
-## 최근 업데이트 (2024-02-14)
+## 최근 업데이트 (2026-02-14)
 
+- 노트북 출력 문제 수정
+  - `matplotlib.use('Agg')` 제거 → `%matplotlib inline`으로 차트 정상 표시
+  - 모든 분석 셀에 `show_result()` 헬퍼 추가 → 결과 요약 + 차트 자동 출력
+  - `_final.ipynb`, `_template.ipynb` 모두 동일하게 수정
 - 코드 구조 리팩토링 완료 (Phase 3)
   - 분석 함수 카테고리별 모듈 분리 (`core/` 4개 모듈)
   - 유틸리티/시각화 모듈 재구성 (`utils/`, `visualization/`)
   - 기존 import 경로 호환성 유지
-- 프로젝트 구조 정리 (Phase 1, 2)
-  - 불필요한 파일 제거, 문서 업데이트
-  - CHANGELOG.md, 01_Specs/README.md 추가
 - 노트북 해석 섹션 전면 강화 (통계 비전문가용)
 - 모든 분석 함수 파라미터 에러 수정 완료
 - 한글 폰트 설정 개선 (macOS 지원)
