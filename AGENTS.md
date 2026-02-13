@@ -39,8 +39,12 @@ uv run pytest
   - `utils/`: 통계 헬퍼, 정합성 검사, 샘플 데이터 생성
   - `visualization/`: 시각화 설정 (한글 폰트)
   - `analysis/`: 기존 import 호환용 래퍼
+- `02_Data/`: 샘플 데이터 + 데이터 준비 가이드
+  - `데이터_준비_가이드.md`: 비개발자용 데이터 입력 안내
 - `03_Code/scripts/`: 실행 스크립트 (분석 파이프라인, 데이터 생성)
 - `04_Notebooks/`: Jupyter 노트북 (분석 + 해석 가이드)
+  - `nonparametric_analysis_template.ipynb`: 설정 셀 기반 분석 템플릿
+  - `nonparametric_analysis_final.ipynb`: 샘플 데이터 참고용 노트북
 - `tests/`: 테스트 코드
 - `pyproject.toml`: 의존성/빌드/pytest 설정
 

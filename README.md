@@ -9,6 +9,7 @@
 - 분석 사양/이론/보고서/해석 가이드 문서: `01_Specs/`
 - 일반인을 위한 결과 해석 가이드: `01_Specs/05_비모수_통계분석_결과_해석_가이드.md`
 - 샘플 및 입력 데이터: `02_Data/`
+- **새 데이터로 분석 시작하기**: `02_Data/데이터_준비_가이드.md`
 - 실행 스크립트: `03_Code/scripts/`
 - 핵심 분석 패키지: `03_Code/src/nonparametric_analysis/`
 - 탐색/시각화 노트북: `04_Notebooks/`
@@ -28,7 +29,8 @@
 │   ├── 05_비모수_통계분석_결과_해석_가이드.md      # 일반인용 해석 가이드
 │   └── README.md                                   # 문서 네비게이션
 ├── 02_Data/
-│   └── sample_nonparametric.csv                    # 샘플 데이터셋
+│   ├── sample_nonparametric.csv                    # 샘플 데이터셋
+│   └── 데이터_준비_가이드.md                       # 데이터 입력 안내
 ├── 03_Code/
 │   ├── scripts/
 │   │   ├── generate_sample_dataset.py             # 샘플 데이터 생성
@@ -70,6 +72,7 @@
 
 | 하고 싶은 작업 | 먼저 볼 폴더/문서 | 다음으로 볼 코드/결과 |
 |---|---|---|
+| **내 데이터로 분석 시작** | `02_Data/데이터_준비_가이드.md` | `04_Notebooks/nonparametric_analysis_template.ipynb` |
 | **통계 비전문가용 결과 해석** | `01_Specs/05_비모수_통계분석_결과_해석_가이드.md` | `04_Notebooks/nonparametric_analysis_final.ipynb` |
 | 비모수 분석 기준 파악 | `01_Specs/01_비모수_분석_spec.md` | `03_Code/src/nonparametric_analysis/core/` |
 | 이론/해석 근거 확인 | `01_Specs/02_비모수_분석_이론가이드.md` | `05_Outputs/nonparametric_run/summary.csv` |
@@ -112,18 +115,28 @@ uv run python 03_Code/scripts/run_nonparametric_analysis.py \
 - `05_Outputs/nonparametric_run/correlation_pvalues_adjusted.csv` - 상관분석 결과
 - `05_Outputs/nonparametric_run/figures/*.png` - 시각화 차트들
 
+## 본인 데이터로 분석하기
+
+1. CSV 파일을 `02_Data/` 폴더에 넣기
+2. `04_Notebooks/nonparametric_analysis_template.ipynb` 열기
+3. **설정 셀 하나만 수정** (파일명, 컬럼명 입력)
+4. 전체 셀 실행 → 해당되지 않는 분석은 자동 건너뜀
+
+자세한 데이터 형식은 `02_Data/데이터_준비_가이드.md`를 참고하세요.
+
 ## 노트북 실행
 
 **추천 노트북:**
-- **`04_Notebooks/nonparametric_analysis_final.ipynb`**
+- **`04_Notebooks/nonparametric_analysis_final.ipynb`** (참고용)
   - 17종 비모수 분석 전체 포함
   - 각 분석마다 **통계 비전문가를 위한 상세한 해석 가이드** 포함
   - 실무 활용 예시 및 차트 읽는 법 설명
   - `show_result(res)` 헬퍼로 결과 요약 + 차트 자동 출력
 
-- `04_Notebooks/nonparametric_analysis_template.ipynb`
-  - 새로운 데이터로 분석 시작 시 복사해서 사용
-  - final과 동일한 `show_result()` 헬퍼 내장
+- **`04_Notebooks/nonparametric_analysis_template.ipynb`** (실제 분석용)
+  - **설정 셀 하나만 수정**하면 본인 데이터로 17종 분석 가능
+  - 데이터 검증 + 한국어 오류 안내 내장
+  - 미설정 분석은 자동 건너뜀 (에러 없음)
 
 ## 테스트
 
@@ -207,14 +220,14 @@ from nonparametric_analysis.utils import generate_sample_dataset, adjust_pvalue_
 
 ## 최근 업데이트 (2026-02-14)
 
-- 노트북 출력 문제 수정
+- 템플릿 노트북 사용성 대폭 개선 (v0.3.0)
+  - **설정 셀 1개만 수정**하면 본인 데이터로 전체 분석 가능
+  - 데이터 검증 + 한국어 오류 메시지 내장
+  - 미설정 분석(그룹비교, 전/후 비교 등)은 자동 건너뜀
+  - `02_Data/데이터_준비_가이드.md` 신규 추가
+- 노트북 출력 문제 수정 (v0.2.1)
   - `matplotlib.use('Agg')` 제거 → `%matplotlib inline`으로 차트 정상 표시
-  - 모든 분석 셀에 `show_result()` 헬퍼 추가 → 결과 요약 + 차트 자동 출력
-  - `_final.ipynb`, `_template.ipynb` 모두 동일하게 수정
-- 코드 구조 리팩토링 완료 (Phase 3)
+  - 모든 분석 셀에 `show_result()` 헬퍼 추가
+- 코드 구조 리팩토링 완료 (v0.2.0)
   - 분석 함수 카테고리별 모듈 분리 (`core/` 4개 모듈)
   - 유틸리티/시각화 모듈 재구성 (`utils/`, `visualization/`)
-  - 기존 import 경로 호환성 유지
-- 노트북 해석 섹션 전면 강화 (통계 비전문가용)
-- 모든 분석 함수 파라미터 에러 수정 완료
-- 한글 폰트 설정 개선 (macOS 지원)
