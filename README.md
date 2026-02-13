@@ -117,10 +117,16 @@ uv run python 03_Code/scripts/run_nonparametric_analysis.py \
 
 ## 본인 데이터로 분석하기
 
+**방법 A: CSV 파일 사용**
 1. CSV 파일을 `02_Data/` 폴더에 넣기
 2. `04_Notebooks/nonparametric_analysis_template.ipynb` 열기
 3. **설정 셀 하나만 수정** (파일명, 컬럼명 입력)
 4. 전체 셀 실행 → 해당되지 않는 분석은 자동 건너뜀
+
+**방법 B: 복사/붙여넣기 (DRM 문서용)**
+1. `04_Notebooks/nonparametric_analysis_template.ipynb` 열기
+2. 설정 셀의 `PASTE_DATA`에 데이터 직접 붙여넣기
+3. 컬럼명 설정 후 전체 셀 실행
 
 자세한 데이터 형식은 `02_Data/데이터_준비_가이드.md`를 참고하세요.
 
@@ -135,6 +141,7 @@ uv run python 03_Code/scripts/run_nonparametric_analysis.py \
 
 - **`04_Notebooks/nonparametric_analysis_template.ipynb`** (실제 분석용)
   - **설정 셀 하나만 수정**하면 본인 데이터로 17종 분석 가능
+  - CSV 파일 또는 **복사/붙여넣기**(DRM 문서용) 두 가지 입력 방식 지원
   - 데이터 검증 + 한국어 오류 안내 내장
   - 미설정 분석은 자동 건너뜀 (에러 없음)
 
@@ -220,6 +227,10 @@ from nonparametric_analysis.utils import generate_sample_dataset, adjust_pvalue_
 
 ## 최근 업데이트 (2026-02-14)
 
+- 데이터 복사/붙여넣기 지원 추가 (v0.3.1)
+  - DRM 문서 등 파일 저장이 어려운 경우 `PASTE_DATA` 변수에 직접 붙여넣기 가능
+  - 쉼표/탭/세미콜론 구분자 자동 인식
+  - 노트북 셀 구조 정리 (중복 셀 제거, 헤더 순서 정렬)
 - 템플릿 노트북 사용성 대폭 개선 (v0.3.0)
   - **설정 셀 1개만 수정**하면 본인 데이터로 전체 분석 가능
   - 데이터 검증 + 한국어 오류 메시지 내장
