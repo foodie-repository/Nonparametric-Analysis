@@ -12,11 +12,11 @@ if str(SRC_DIR) not in sys.path:
 
 from nonparametric_analysis.analysis import (
     adjust_pvalue_matrix_fdr,
+    correlation_matrix_nonparametric,
     formula_violation_mask,
     generate_sample_dataset,
-    mann_kendall_trend,
+    mann_kendall_test,
     pettitt_test,
-    spearman_corr,
 )
 
 
@@ -27,17 +27,17 @@ def test_pettitt_detects_change_point_near_true_location():
     values = np.concatenate([left, right])
 
     result = pettitt_test(values)
-    assert 35 <= result.change_index <= 55
-    assert result.p_value < 0.05
+    assert 35 <= result["change_point"] <= 55
+    assert result["p_value"] < 0.05
 
 
 def test_mann_kendall_finds_positive_trend():
     x = np.arange(1, 50)
     y = x + np.random.default_rng(9).normal(0, 0.5, size=len(x))
 
-    tau, p_value = mann_kendall_trend(values=y, time_index=x)
-    assert tau > 0.8
-    assert p_value < 0.001
+    result = mann_kendall_test(y)
+    assert result["tau"] > 0.8
+    assert result["p_value"] < 0.001
 
 
 def test_spearman_and_fdr_matrix_shapes():
@@ -49,7 +49,9 @@ def test_spearman_and_fdr_matrix_shapes():
         }
     )
 
-    corr, pvals = spearman_corr(df, ["a", "b", "c"])
+    result = correlation_matrix_nonparametric(df, method="spearman")
+    corr = result["correlation"]
+    pvals = result["p_values"]
     pvals_adj = adjust_pvalue_matrix_fdr(pvals)
 
     assert corr.shape == (3, 3)
@@ -63,13 +65,16 @@ def test_formula_violation_mask_identifies_broken_rows():
         {
             "feature_1": [10.0, 20.0, 30.0],
             "feature_2": [1.0, 2.0, 3.0],
-            "feature_total": [11.0, 21.0, 99.0],
+            "feature_total": [11.0, 22.0, 99.0],  # Row 2 is the only violation
         }
     )
 
     violations = formula_violation_mask(
         df,
-        lambda frame: np.isclose(frame["feature_total"], frame["feature_1"] + frame["feature_2"]),
+        lambda frame: pd.Series(
+            np.isclose(frame["feature_total"], frame["feature_1"] + frame["feature_2"]),
+            index=frame.index
+        ),
     )
     assert violations.sum() == 1
     assert bool(violations.iloc[2])
