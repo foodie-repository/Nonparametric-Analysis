@@ -10,7 +10,7 @@
 - 일반인을 위한 결과 해석 가이드: `01_Specs/05_비모수_통계분석_결과_해석_가이드.md`
 - 샘플 및 입력 데이터: `02_Data/`
 - 실행 스크립트: `03_Code/scripts/`
-- 핵심 분석 패키지: `src/nonparametric_analysis/`
+- 핵심 분석 패키지: `03_Code/src/nonparametric_analysis/`
 - 탐색/시각화 노트북: `04_Notebooks/`
 - 실행 결과 및 리포트: `05_Outputs/`
 - 레거시/보관 문서: `99_Archive/`
@@ -30,23 +30,23 @@
 ├── 02_Data/
 │   └── sample_nonparametric.csv                    # 샘플 데이터셋
 ├── 03_Code/
-│   └── scripts/
-│       ├── generate_sample_dataset.py             # 샘플 데이터 생성
-│       ├── run_nonparametric_analysis.py          # 전체 분석 실행
-│       └── dev/                                    # 개발/유틸리티 스크립트
-├── src/nonparametric_analysis/                     # 핵심 분석 패키지
-│   ├── core/                                       # 분석 함수 (카테고리별 분리)
-│   │   ├── single_variable.py                     #   정규성, 런, 추세, 변곡점, PELT
-│   │   ├── group_comparison.py                    #   Mann-Whitney, K-S, Wilcoxon, Kruskal, Friedman
-│   │   ├── correlation.py                         #   Spearman, Kendall, Distance 상관분석
-│   │   └── resampling.py                          #   Bootstrap, Permutation
-│   ├── utils/                                      # 유틸리티
-│   │   ├── stats.py                               #   통계 헬퍼 함수
-│   │   ├── integrity.py                           #   데이터 정합성 검사
-│   │   └── sample.py                              #   샘플 데이터 생성 로직
-│   ├── visualization/
-│   │   └── setup.py                               #   한글 폰트/시각화 설정
-│   └── analysis/                                   # 기존 import 호환용
+│   ├── scripts/
+│   │   ├── generate_sample_dataset.py             # 샘플 데이터 생성
+│   │   ├── run_nonparametric_analysis.py          # 전체 분석 실행
+│   │   └── dev/                                    # 개발/유틸리티 스크립트
+│   └── src/nonparametric_analysis/                 # 핵심 분석 패키지
+│       ├── core/                                   # 분석 함수 (카테고리별 분리)
+│       │   ├── single_variable.py                 #   정규성, 런, 추세, 변곡점, PELT
+│       │   ├── group_comparison.py                #   Mann-Whitney, K-S, Wilcoxon, Kruskal, Friedman
+│       │   ├── correlation.py                     #   Spearman, Kendall, Distance 상관분석
+│       │   └── resampling.py                      #   Bootstrap, Permutation
+│       ├── utils/                                  # 유틸리티
+│       │   ├── stats.py                           #   통계 헬퍼 함수
+│       │   ├── integrity.py                       #   데이터 정합성 검사
+│       │   └── sample.py                          #   샘플 데이터 생성 로직
+│       ├── visualization/
+│       │   └── setup.py                           #   한글 폰트/시각화 설정
+│       └── analysis/                               # 기존 import 호환용
 ├── 04_Notebooks/
 │   ├── nonparametric_analysis_final.ipynb         # 최종 실행 노트북 (모든 해석 포함)
 │   └── nonparametric_analysis_template.ipynb      # 분석 템플릿 노트북
@@ -71,15 +71,15 @@
 | 하고 싶은 작업 | 먼저 볼 폴더/문서 | 다음으로 볼 코드/결과 |
 |---|---|---|
 | **통계 비전문가용 결과 해석** | `01_Specs/05_비모수_통계분석_결과_해석_가이드.md` | `04_Notebooks/nonparametric_analysis_final.ipynb` |
-| 비모수 분석 기준 파악 | `01_Specs/01_비모수_분석_spec.md` | `src/nonparametric_analysis/core/` |
+| 비모수 분석 기준 파악 | `01_Specs/01_비모수_분석_spec.md` | `03_Code/src/nonparametric_analysis/core/` |
 | 이론/해석 근거 확인 | `01_Specs/02_비모수_분석_이론가이드.md` | `05_Outputs/nonparametric_run/summary.csv` |
 | 보고서 작성 형식 확인 | `01_Specs/03_비모수_보고서_템플릿.md` | `05_Outputs/nonparametric_run/analysis_report.md` |
-| 패키지 사용법/함수 개요 확인 | `01_Specs/04_비모수_분석_패키지_가이드.md` | `src/nonparametric_analysis/core/` |
+| 패키지 사용법/함수 개요 확인 | `01_Specs/04_비모수_분석_패키지_가이드.md` | `03_Code/src/nonparametric_analysis/core/` |
 | 샘플 데이터 생성 | `03_Code/scripts/generate_sample_dataset.py` | `02_Data/sample_nonparametric.csv` |
 | 전체 분석 실행 | `03_Code/scripts/run_nonparametric_analysis.py` | `05_Outputs/nonparametric_run/` |
-| 정합성 규칙 수정 | `src/nonparametric_analysis/utils/integrity.py` | `05_Outputs/nonparametric_run/integrity_check.csv` |
-| 추세/변곡점 로직 수정 | `src/nonparametric_analysis/core/single_variable.py` | `05_Outputs/nonparametric_run/figures/` |
-| 상관/FDR 로직 수정 | `src/nonparametric_analysis/core/correlation.py` | `05_Outputs/nonparametric_run/correlation_pvalues_adjusted.csv` |
+| 정합성 규칙 수정 | `03_Code/src/nonparametric_analysis/utils/integrity.py` | `05_Outputs/nonparametric_run/integrity_check.csv` |
+| 추세/변곡점 로직 수정 | `03_Code/src/nonparametric_analysis/core/single_variable.py` | `05_Outputs/nonparametric_run/figures/` |
+| 상관/FDR 로직 수정 | `03_Code/src/nonparametric_analysis/core/correlation.py` | `05_Outputs/nonparametric_run/correlation_pvalues_adjusted.csv` |
 | **노트북 기반 탐색 분석** | `04_Notebooks/nonparametric_analysis_final.ipynb` | `05_Outputs/notebook_demo/` |
 | API 엔드포인트 작업 | `main.py` | `tests/test_main.py` |
 
