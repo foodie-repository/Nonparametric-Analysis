@@ -86,10 +86,26 @@
 | **노트북 기반 탐색 분석** | `04_Notebooks/nonparametric_analysis_final.ipynb` | `05_Outputs/notebook_demo/` |
 | API 엔드포인트 작업 | `main.py` | `tests/test_main.py` |
 
+## 사전 준비
+
+이 프로젝트는 Python 패키지 관리자 **[uv](https://docs.astral.sh/uv/)**를 사용합니다. 최초 1회 설치가 필요합니다.
+
+**macOS / Linux:**
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+**Windows (PowerShell):**
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+> **참고**: Python은 별도 설치하지 않아도 됩니다. uv가 프로젝트에 필요한 Python 3.11을 자동으로 다운로드합니다.
+
 ## 빠른 시작
 
 ```bash
-# 1) 의존성 설치
+# 1) 의존성 설치 (Python 자동 다운로드 포함)
 uv sync --extra dev
 ```
 
