@@ -1,0 +1,6 @@
+metric,value
+row_count,120
+duplicate_rows,2
+range_violations_feature_1,4
+mad_outliers_feature_1,1
+formula_violations_feature_total,8

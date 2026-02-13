@@ -1,0 +1,22 @@
+Variable,Test,Statistic,P-Value,Interpretation,Details
+time_index,Shapiro-Wilk,0.9546,0.0005,p = 0.0005 → 매우 강한 유의성 (p < 0.001),Non-normal
+time_index,Runs Test,Z=-10.82,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Runs=2 (Exp=61.0)
+time_index,Pettitt,K=3600,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Point=60 (Mdn: 30.50 -> 90.50)
+time_index,Mann-Kendall,Tau=1.000,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),increasing (Slope=1.0000)
+feature_1,Shapiro-Wilk,0.8922,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Non-normal
+feature_1,Runs Test,Z=-9.62,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Runs=8 (Exp=60.0)
+feature_1,Pettitt,K=3462,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Point=60 (Mdn: 51.49 -> 73.53)
+feature_1,Mann-Kendall,Tau=0.869,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),increasing (Slope=0.3355)
+feature_2,Shapiro-Wilk,0.9338,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Non-normal
+feature_2,Runs Test,Z=-8.51,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Runs=14 (Exp=60.0)
+feature_2,Pettitt,K=3398,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Point=68 (Mdn: 43.89 -> 63.27)
+feature_2,Mann-Kendall,Tau=0.782,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),increasing (Slope=0.2858)
+feature_3,Shapiro-Wilk,0.9670,0.0048,p = 0.0048 → 유의함 (p < 0.05),Non-normal
+feature_3,Runs Test,Z=-8.98,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Runs=12 (Exp=61.0)
+feature_3,Pettitt,K=3511,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Point=67 (Mdn: 28.97 -> 34.93)
+feature_3,Mann-Kendall,Tau=0.671,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),increasing (Slope=0.0879)
+feature_total,Shapiro-Wilk,0.9245,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Non-normal
+feature_total,Runs Test,Z=-9.35,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Runs=10 (Exp=61.0)
+feature_total,Pettitt,K=3563,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),Point=63 (Mdn: 96.54 -> 135.93)
+feature_total,Mann-Kendall,Tau=0.841,0.0000,p = 0.0000 → 매우 강한 유의성 (p < 0.001),increasing (Slope=0.6161)
+All,Correlation Matrix,N/A,N/A,Detailed,See figures/correlation_matrix.png

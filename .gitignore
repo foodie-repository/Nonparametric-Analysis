@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+test_log.txt
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# uv
+uv.lock
+
+# Outputs (선택적 - 필요시 주석 해제)
+# 05_Outputs/*/
+# !05_Outputs/.gitkeep
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Matplotlib
+.matplotlib/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
