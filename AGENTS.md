@@ -18,10 +18,10 @@
 ## 3) 필수 개발 명령
 
 ```bash
-# 의존성 설치
+# 의존성 설치 (배포용 - 앱 실행에 필요한 것만)
 uv sync
 
-# 개발 의존성 포함 설치
+# 개발 의존성 포함 설치 (개발자용 - 테스트/린트 도구 포함)
 uv sync --extra dev
 
 # 개발 서버 실행
@@ -29,6 +29,27 @@ uv run uvicorn main:app --reload
 
 # 테스트 실행
 uv run pytest
+```
+
+### 의존성 분류 기준
+
+**일반 의존성** (`[project.dependencies]`):
+- 앱 실행 시 import되는 모든 패키지
+- 예: `fastapi`, `sqlalchemy`, `pydantic`, `numpy`, `scipy`
+- 배포 환경(Docker, 프로덕션 서버)에 반드시 포함
+
+**개발 의존성** (`[project.optional-dependencies.dev]`):
+- 개발/테스트/린트 도구
+- 예: `pytest`, `pytest-cov`, `black`, `mypy`, `ruff`
+- 배포 환경에서 제외 → 용량 절약, 보안 위험 감소, 배포 속도 향상
+
+**Docker 배포 시 주의:**
+```dockerfile
+# ❌ 잘못된 예 (개발 도구까지 설치)
+RUN uv sync --extra dev
+
+# ✅ 올바른 예 (앱 실행에 필요한 것만)
+RUN uv sync
 ```
 
 ## 4) 디렉터리 기준
