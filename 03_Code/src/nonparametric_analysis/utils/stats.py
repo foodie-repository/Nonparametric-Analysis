@@ -95,8 +95,6 @@ def benjamini_hochberg(p_values: np.ndarray | pd.Series | list[float]) -> np.nda
     if n_tests == 0:
         return adjusted
 
-    # Rank: 1 to N
-    ranks = stats.rankdata(p_finite)
     # Sort p-values
     sorted_idx = np.argsort(p_finite)
     sorted_p = p_finite[sorted_idx]

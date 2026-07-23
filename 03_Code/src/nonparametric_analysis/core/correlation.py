@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Literal
+
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -15,7 +17,7 @@ from ..utils.stats import as_float_array
 # --- 6. Correlation Analysis ---
 
 
-def spearman_correlation(x, y, x_name="X", y_name="Y", save_path: str = None) -> dict:
+def spearman_correlation(x, y, x_name="X", y_name="Y", save_path: str | None = None) -> dict:
     """Spearman correlation with rank plot."""
     x = as_float_array(x)
     y = as_float_array(y)
@@ -48,11 +50,13 @@ def spearman_correlation(x, y, x_name="X", y_name="Y", save_path: str = None) ->
 
 
 def correlation_matrix_nonparametric(
-    df: pd.DataFrame, method: str = "spearman", save_path: str = None
+    df: pd.DataFrame,
+    method: Literal["spearman", "kendall", "pearson"] = "spearman",
+    save_path: str | None = None,
 ) -> dict:
     """Correlation matrix and p-value matrix."""
-    cols = df.select_dtypes(include=[np.number]).columns
-    df_num = df[cols]
+    df_num = df.select_dtypes(include=[np.number])
+    cols = df_num.columns
 
     corr = df_num.corr(method=method)
     p_mat = pd.DataFrame(np.zeros((len(cols), len(cols))), columns=cols, index=cols)
@@ -107,7 +111,7 @@ def correlation_matrix_nonparametric(
     return {"correlation": corr, "p_values": p_mat, "figure": fig}
 
 
-def kendall_corr(x, y, x_name="X", y_name="Y", save_path: str = None) -> dict:
+def kendall_corr(x, y, x_name="X", y_name="Y", save_path: str | None = None) -> dict:
     """Kendall's Tau correlation."""
     x = as_float_array(x)
     y = as_float_array(y)

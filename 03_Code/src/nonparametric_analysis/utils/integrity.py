@@ -14,7 +14,7 @@ def missing_rate_report(df: pd.DataFrame) -> pd.DataFrame:
     n_rows = len(df)
     rows: list[dict[str, float | str]] = []
     for column in df.columns:
-        missing_count = int(df[column].isna().sum())
+        missing_count = int(df[column].isna().to_numpy().sum())
         missing_rate = float(missing_count / n_rows) if n_rows else 0.0
         rows.append(
             {
@@ -35,7 +35,7 @@ def duplicate_rows(df: pd.DataFrame, subset: list[str]) -> pd.DataFrame:
     if not subset:
         raise ValueError("subset must not be empty.")
 
-    return df[df.duplicated(subset=subset, keep=False)].copy()
+    return df.loc[df.duplicated(subset=subset, keep=False)].copy()
 
 
 def range_violation_mask(

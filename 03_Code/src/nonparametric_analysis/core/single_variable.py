@@ -19,7 +19,7 @@ def test_normality(
     data: pd.Series | list[float],
     name: str = "Feature",
     alpha: float = 0.05,
-    save_path: str = None,
+    save_path: str | None = None,
 ) -> dict:
     """Shapiro-Wilk normality test with 3-panel plot."""
     clean_data = as_float_array(data)
@@ -81,7 +81,7 @@ def test_normality(
 
 
 def runs_test_analysis(
-    data: pd.Series | list[float], name: str = "Series", save_path: str = None
+    data: pd.Series | list[float], name: str = "Series", save_path: str | None = None
 ) -> dict:
     """Runs test for randomness."""
     clean_data = as_float_array(data)
@@ -150,7 +150,7 @@ def runs_test_analysis(
 
 
 def mann_kendall_test(
-    data: pd.Series | list[float], name: str = "Feature", save_path: str = None
+    data: pd.Series | list[float], name: str = "Feature", save_path: str | None = None
 ) -> dict:
     """Mann-Kendall trend test with Sen's slope."""
     clean_data = as_float_array(data)
@@ -188,7 +188,7 @@ def mann_kendall_test(
 
 
 def pettitt_test(
-    data: pd.Series | list[float], name: str = "Feature", save_path: str = None
+    data: pd.Series | list[float], name: str = "Feature", save_path: str | None = None
 ) -> dict:
     """Pettitt change-point test (Optimized O(N log N))."""
     clean_data = as_float_array(data)
@@ -227,7 +227,7 @@ def pettitt_test(
     # Guide used [:cp] and [cp:]. This implies Guide's 'cp' was t+1.
     # I will stick to returning the index where the shift happens (start of new segment).
 
-    shift_index = cp + 1
+    shift_index = int(cp) + 1
     med_before = np.median(clean_data[:shift_index])
     med_after = np.median(clean_data[shift_index:])
 
@@ -277,9 +277,9 @@ def pettitt_test(
 def detect_changepoints_pelt(
     data: pd.Series | list[float],
     model: str = "rbf",
-    penalty: float = None,
+    penalty: float | None = None,
     name: str = "Feature",
-    save_path: str = None,
+    save_path: str | None = None,
 ) -> dict:
     """PELT multiple change-point detection."""
     clean_data = as_float_array(data)

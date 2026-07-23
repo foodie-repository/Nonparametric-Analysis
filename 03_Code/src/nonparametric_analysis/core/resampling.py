@@ -16,9 +16,9 @@ def bootstrap_ci(
     stat_func=np.median,
     n_boot: int = 10000,
     ci: int = 95,
-    seed: int = None,
+    seed: int | None = None,
     name: str = "Stat",
-    save_path: str = None,
+    save_path: str | None = None,
 ) -> dict:
     """Bootstrap Confidence Interval."""
     clean_data = as_float_array(data)
@@ -64,8 +64,8 @@ def permutation_test(
     n_perm: int = 5000,
     name1="G1",
     name2="G2",
-    seed: int = None,
-    save_path: str = None,
+    seed: int | None = None,
+    save_path: str | None = None,
 ) -> dict:
     """Permutation test for difference in statistic."""
     g1 = as_float_array(group1)

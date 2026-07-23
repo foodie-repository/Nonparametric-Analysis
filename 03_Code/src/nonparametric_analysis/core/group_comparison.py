@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import cast
+
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -19,7 +21,7 @@ def mann_whitney_test(
     group2,
     name1="G1",
     name2="G2",
-    save_path: str = None,
+    save_path: str | None = None,
 ) -> dict:
     """Mann-Whitney U test with effect sizes."""
     g1 = as_float_array(group1)
@@ -77,7 +79,7 @@ def mann_whitney_test(
     }
 
 
-def ks_test(group1, group2, name1="G1", name2="G2", save_path: str = None) -> dict:
+def ks_test(group1, group2, name1="G1", name2="G2", save_path: str | None = None) -> dict:
     """Kolmogorov-Smirnov Test."""
     g1 = as_float_array(group1)
     g1 = g1[~np.isnan(g1)]
@@ -104,7 +106,7 @@ def ks_test(group1, group2, name1="G1", name2="G2", save_path: str = None) -> di
 
 
 def wilcoxon_paired_test(
-    before, after, name="Measurement", save_path: str = None
+    before, after, name="Measurement", save_path: str | None = None
 ) -> dict:
     """Wilcoxon signed-rank test (paired)."""
     b = as_float_array(before)
@@ -119,6 +121,7 @@ def wilcoxon_paired_test(
 
     diff = a - b
     stat, p_value = stats.wilcoxon(b, a, alternative="two-sided")
+    stat = cast(float, stat)  # scipy stub types unpacked result loosely
     n = len(diff[diff != 0])
 
     z = (
@@ -167,7 +170,7 @@ def sign_test(
     data: pd.Series | list[float],
     hypothesized_median: float = 0.0,
     name: str = "Feature",
-    save_path: str = None,
+    save_path: str | None = None,
 ) -> dict:
     """Sign test for median."""
     clean_data = as_float_array(data)
@@ -198,7 +201,7 @@ def wilcoxon_one_sample(
     data: pd.Series | list[float],
     hypothesized_median: float = 0.0,
     name: str = "Feature",
-    save_path: str = None,
+    save_path: str | None = None,
 ) -> dict:
     """Wilcoxon signed-rank test (one sample)."""
     clean_data = as_float_array(data)
@@ -208,6 +211,7 @@ def wilcoxon_one_sample(
     stat, p_value = stats.wilcoxon(
         diff, alternative="two-sided"
     )  # zero_method='wilcox' default excludes zeros
+    stat = cast(float, stat)  # scipy stub types unpacked result loosely
 
     n = len(diff[diff != 0])
     # Approximate Z for effect size
@@ -253,7 +257,7 @@ def wilcoxon_one_sample(
 # --- 5. Multi-Group Analysis ---
 
 
-def kruskal_wallis_test(*groups, group_names=None, save_path: str = None) -> dict:
+def kruskal_wallis_test(*groups, group_names=None, save_path: str | None = None) -> dict:
     """Kruskal-Wallis H Test with Dunn Posthoc."""
     if len(groups) == 1 and isinstance(groups[0], (list, tuple)):
         groups = groups[0]
@@ -313,7 +317,7 @@ def kruskal_wallis_test(*groups, group_names=None, save_path: str = None) -> dic
     return result
 
 
-def friedman_test(*conditions, condition_names=None, save_path: str = None) -> dict:
+def friedman_test(*conditions, condition_names=None, save_path: str | None = None) -> dict:
     """Friedman Test for repeated measures."""
     if len(conditions) == 1 and isinstance(conditions[0], (list, tuple)):
         conditions = conditions[0]
@@ -325,7 +329,7 @@ def friedman_test(*conditions, condition_names=None, save_path: str = None) -> d
 
     start_df = pd.DataFrame(clean_conds).T
     start_df.dropna(inplace=True)
-    final_conds = [start_df[i].values for i in range(len(clean_conds))]
+    final_conds = [start_df[i].to_numpy(dtype=float) for i in range(len(clean_conds))]
 
     stat, p_value = stats.friedmanchisquare(*final_conds)
     k, n = len(final_conds), len(final_conds[0])
