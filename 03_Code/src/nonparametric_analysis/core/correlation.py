@@ -134,12 +134,17 @@ def kendall_corr(x, y, x_name="X", y_name="Y", save_path: str | None = None) -> 
     return {"correlation": tau, "p_value": p_value, "figure": fig}
 
 
-def distance_correlation(x, y, n_perm: int = 2000, save_path: str = None) -> dict:
+def distance_correlation(
+    x, y, n_perm: int = 2000, seed: int | None = None, save_path: str | None = None
+) -> dict:
     """Distance Correlation with permutation test."""
     x = as_float_array(x)
     y = as_float_array(y)
     valid = ~np.isnan(x) & ~np.isnan(y)
     x, y = x[valid], y[valid]
+
+    if seed is not None:
+        np.random.seed(seed)
 
     def dcov(a, b):
         A = squareform(pdist(a.reshape(-1, 1)))
