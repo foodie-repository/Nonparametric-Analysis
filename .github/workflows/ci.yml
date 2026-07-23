@@ -1,0 +1,42 @@
+name: CI
+
+# master 대상 push와 Pull Request에서 품질 게이트(린트·타입·테스트)를 실행한다.
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  quality:
+    name: Lint · Type · Test
+    runs-on: ubuntu-latest
+    env:
+      # CI 러너는 화면이 없으므로(headless) matplotlib를 파일 기반 Agg 백엔드로 강제한다.
+      # 이게 없으면 GUI 백엔드를 잡으려다 그림 생성 코드가 실패할 수 있다.
+      MPLBACKEND: Agg
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: uv 설치 (+ 캐시)
+        uses: astral-sh/setup-uv@v8
+        with:
+          enable-cache: true
+
+      - name: 의존성 설치 (main + dev)
+        # --locked: uv.lock이 pyproject.toml과 어긋나면 실패시켜 잠금 파일을 최신으로 강제
+        # --extra dev: pytest 등 개발 의존성 포함. Python 버전은 .python-version(3.11)을 존중.
+        run: uv sync --locked --extra dev
+
+      - name: 린트 (ruff)
+        # 라이브러리 소스만 게이트. tests/·scripts/는 sys.path 조작 후 import 패턴(E402)이 있어 제외.
+        run: uvx ruff check 03_Code/src
+
+      - name: 타입 체크 (pyright)
+        # numpy/pandas 스텁을 보려면 설치된 venv 컨텍스트가 필요하므로 uv run으로 실행한다.
+        run: uv run --with pyright pyright 03_Code/src
+
+      - name: 테스트 (pytest)
+        run: uv run pytest
