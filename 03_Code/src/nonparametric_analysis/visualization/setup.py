@@ -41,9 +41,12 @@ def setup_visualization():
     # Seaborn theme
     sns.set_theme(style="whitegrid", font=font_family)
 
-    # Optional: Improve resolution for retina displays
+    # Optional: Improve resolution for retina displays.
+    # set_matplotlib_formats는 IPython 7.23+에서 IPython.display -> matplotlib_inline로
+    # 이동했다(구 경로는 IPython 9에서 제거됨). 노트북이 아닌 환경에서는 조용히 건너뛴다.
     try:
-        from IPython.display import set_matplotlib_formats
+        from matplotlib_inline.backend_inline import set_matplotlib_formats
+
         set_matplotlib_formats("retina")
     except ImportError:
         pass

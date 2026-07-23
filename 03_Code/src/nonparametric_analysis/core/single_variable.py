@@ -58,7 +58,10 @@ def test_normality(
 
     # Box Plot
     axes[2].boxplot(
-        clean_data, vert=True, patch_artist=True, boxprops=dict(facecolor="lightyellow")
+        clean_data,
+        orientation="vertical",
+        patch_artist=True,
+        boxprops=dict(facecolor="lightyellow"),
     )
     axes[2].set_title("Box Plot")
 
@@ -313,7 +316,7 @@ def detect_changepoints_pelt(
 
     axes[0].set_title(f"{name}: PELT ({len(result)-1} changes)")
     if segs:
-        axes[1].boxplot(segs, labels=labels, patch_artist=True)
+        axes[1].boxplot(segs, tick_labels=labels, patch_artist=True)
     axes[1].set_title("Segment Distribution")
     plt.tight_layout()
 

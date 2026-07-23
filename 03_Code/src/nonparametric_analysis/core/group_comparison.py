@@ -41,7 +41,9 @@ def mann_whitney_test(
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
     # Boxplot + Jitter
-    bp = axes[0].boxplot([g1, g2], labels=[name1, name2], patch_artist=True, widths=0.5)
+    bp = axes[0].boxplot(
+        [g1, g2], tick_labels=[name1, name2], patch_artist=True, widths=0.5
+    )
     colors = ["lightcoral", "lightskyblue"]
     for patch, color in zip(bp["boxes"], colors):
         patch.set_facecolor(color)
@@ -217,7 +219,10 @@ def wilcoxon_one_sample(
 
     fig, ax = plt.subplots(figsize=(8, 4))
     ax.boxplot(
-        clean_data, vert=False, patch_artist=True, boxprops=dict(facecolor="lightblue")
+        clean_data,
+        orientation="horizontal",
+        patch_artist=True,
+        boxprops=dict(facecolor="lightblue"),
     )
     ax.axvline(
         hypothesized_median, color="red", ls="--", label=f"H0={hypothesized_median}"
@@ -263,10 +268,10 @@ def kruskal_wallis_test(*groups, group_names=None, save_path: str = None) -> dic
         group_names = [f"G{i+1}" for i in range(k)]
 
     fig, ax = plt.subplots(figsize=(10, 5))
-    bp = ax.boxplot(clean_groups, labels=group_names, patch_artist=True)
+    bp = ax.boxplot(clean_groups, tick_labels=group_names, patch_artist=True)
 
     # Colors
-    cmap = plt.cm.get_cmap("Set3")
+    cmap = plt.get_cmap("Set3")
     for i, (patch, g) in enumerate(zip(bp["boxes"], clean_groups)):
         patch.set_facecolor(cmap(i % 12))
         jitter = np.random.normal(0, 0.04, len(g))
@@ -351,7 +356,7 @@ def friedman_test(*conditions, condition_names=None, save_path: str = None) -> d
     axes[0].set_title(f"Friedman chi2={stat:.2f}, p={p_value:.4f}")
     axes[0].legend()
 
-    axes[1].boxplot(final_conds, labels=condition_names, patch_artist=True)
+    axes[1].boxplot(final_conds, tick_labels=condition_names, patch_artist=True)
     axes[1].set_title(f"Kendall's W={kendall_w:.3f}")
     plt.tight_layout()
 
