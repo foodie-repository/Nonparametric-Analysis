@@ -27,6 +27,7 @@ dev = [
     "pytest>=8.0.0",
     "pytest-asyncio>=0.24.0",
     "httpx>=0.27.0",
+    "ruff>=0.16.0",
 ]
 
 [build-system]
@@ -42,3 +43,9 @@ testpaths = ["tests"]
 python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
+
+[tool.ruff.lint]
+# ruff 0.16부터 기본 규칙셋이 확장(I/C4/S 등)되었다. 이 프로젝트의 린트 정책은
+# 전통적 기본 규칙(E4/E7/E9/F)으로 고정해, ruff 버전이 올라도 흔들리지 않게 명시한다.
+# (예: __init__.py의 논리 그룹 주석으로 큐레이팅된 재노출 import는 isort 재정렬 대상 아님)
+select = ["E4", "E7", "E9", "F"]

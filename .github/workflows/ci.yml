@@ -33,7 +33,8 @@ jobs:
 
       - name: 린트 (ruff)
         # 라이브러리 소스만 게이트. tests/·scripts/는 sys.path 조작 후 import 패턴(E402)이 있어 제외.
-        run: uvx ruff check 03_Code/src
+        # ruff는 dev 의존성으로 uv.lock에 고정되어 있어 uv run으로 결정론적 버전을 사용한다.
+        run: uv run ruff check 03_Code/src
 
       - name: 타입 체크 (pyright)
         # numpy/pandas 스텁을 보려면 설치된 venv 컨텍스트가 필요하므로 uv run으로 실행한다.
