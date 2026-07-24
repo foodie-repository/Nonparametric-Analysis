@@ -262,6 +262,10 @@ from nonparametric_analysis.utils import generate_sample_dataset, adjust_pvalue_
 - 개발 규칙 및 체크리스트는 `AGENTS.md`를 참조하세요.
 - 변경 이력은 `CHANGELOG.md`를 참조하세요.
 
+## 라이선스
+
+이 프로젝트는 [MIT 라이선스](LICENSE)로 배포됩니다.
+
 ## 최근 업데이트 (2026-02-14)
 
 - 데이터 복사/붙여넣기 지원 추가 (v0.3.1)

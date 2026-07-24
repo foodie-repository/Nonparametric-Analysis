@@ -3,6 +3,8 @@ name = "nonparametric-analysis"
 version = "0.1.0"
 description = "FastAPI + React 웹 서비스"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.115.0",
