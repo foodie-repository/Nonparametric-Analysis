@@ -42,6 +42,9 @@ dist/
 # 05_Outputs/*/
 # !05_Outputs/.gitkeep
 
+# oh-my-claudecode 오케스트레이션 세션/상태 (워크트리 로컬, 커밋 대상 아님)
+.omc/
+
 # Temporary files
 *.tmp
 *.temp
