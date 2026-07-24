@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: 저장소 체크아웃
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: uv 설치 (+ 캐시)
         # setup-uv는 v8 floating 태그를 발행하지 않으므로 공식 문서 권장대로 SHA로 핀(= v8.1.0).
